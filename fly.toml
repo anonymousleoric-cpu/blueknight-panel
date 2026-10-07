@@ -1,0 +1,35 @@
+app = "blueknight-panel"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  PANEL_PATH = "knight"
+  PANEL_TOKEN = ""
+  FORCE_HTTPS = "true"
+  # Prisma Postgres connection string for data persistence
+  DATABASE_URL = "postgres://2e8910553dcdbaed42651493bd940e1a047eadb5339bd46195a0eb758999481e:sk_7aQh7zzRQtuXVrnNQYPt0@db.prisma.io:5432/postgres?sslmode=require"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[http_service.checks]]
+    interval = "10s"
+    timeout = "5s"
+    method = "get"
+    path = "/knight"
+
+[[vm]]
+  memory = "256mb"
+  cpu_kind = "shared"
+  cpus = 1
+
+[processes]
+  app = "node index.js"

@@ -1,0 +1,19 @@
+{
+  "services": [
+    {
+      "type": "web",
+      "name": "blueknight-panel",
+      "env": "docker",
+      "dockerfilePath": "./Dockerfile",
+      "plan": "free",
+      "region": "oregon",
+      "envVars": [
+        {"key": "PORT", "value": "8080"},
+        {"key": "PANEL_PATH", "value": "knight"},
+        {"key": "FORCE_HTTPS", "value": "true"},
+        {"key": "DATABASE_URL", "value": "postgres://2e8910553dcdbaed42651493bd940e1a047eadb5339bd46195a0eb758999481e:sk_7aQh7zzRQtuXVrnNQYPt0@db.prisma.io:5432/postgres?sslmode=require"}
+      ],
+      "healthCheckPath": "/knight"
+    }
+  ]
+}
